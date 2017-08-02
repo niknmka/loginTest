@@ -1,0 +1,22 @@
+{
+  "name": "mobileAutomation",
+  "version": "0.0.1",
+  "description": "Rogue Mobile App Automation",
+  "scripts": {
+    "update": "./node_modules/.bin/webdriver-manager update",
+    "start": "./node_modules/.bin/webdriver-manager start",
+    "compile": "gulp test:compile",
+    "watch": "gulp test:watch",
+    "test": "./node_modules/.bin/protractor ./protractor.js"
+  },
+  "devDependencies": {
+    "@types/chai": "^3.4.34",
+    "@types/mocha": "^2.2.33",
+    "@types/node": "^6.0.51",
+    "chai": "^3.5.0",
+    "chai-smoothie": "^0.3.1",
+    "gulp": "^3.5.6",
+    "gulp-typescript": "^3.1.4",
+    "typescript": "^2.1.4"
+  }
+}
