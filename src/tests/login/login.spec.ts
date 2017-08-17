@@ -14,17 +14,16 @@ describe('Login test', function () {
             });
 
             it('should open login page', async function () {
-                //await browser.waitForAngularEnabled(false)
                 await context.helper.setWindowSize()
                 await context.helper.openHomePage()
-
             })
+
             it('should fill form', async function () {
                 await context.loginPage.fillingLoginFields()
             })
+
             it('should login', async function () {
                 await context.loginPage.logIn()
-
             })
         })
     }

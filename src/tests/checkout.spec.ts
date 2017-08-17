@@ -1,17 +1,9 @@
-import { browser, by, element, protractor, ElementFinder } from 'protractor';
+import { browser, by, element, ExpectedConditions as EC } from 'protractor';
 import {} from 'chai';
 import {} from 'mocha';
 import {dataset} from "./dataset"
+import { Context} from "./context"
 
-async function scrollAndClick(object) {
-    await browser.actions().mouseMove(object).perform();
-    await object.click();
-}
-
-async function scroll(object) {
-    await browser.actions().mouseMove(object).perform();
-}
-let EC = protractor.ExpectedConditions;
 let waitForVisibility = async function (selector) {
     return browser.wait(EC.visibilityOf(element(by.css(selector))));
 }
@@ -19,7 +11,7 @@ let waitForVisibility = async function (selector) {
 
 describe('Authentification and checkout test', function() {
 
-
+    let context = new Context()
 
   it('should login user', async function() {
       await browser.get('http://localhost:8100/');
@@ -36,7 +28,7 @@ describe('Authentification and checkout test', function() {
         let profileIcon = element(by.className('icon rogue-user'));
         await browser.wait(EC.visibilityOf(profileIcon));
         await profileIcon.click();
-        await scrollAndClick(element(by.css('[ng-click="ctrl.debug()"]')));
+        await context.helper.scrollAndClick(element(by.css('[ng-click="ctrl.debug()"]')))
         await element(by.className('ng-pristine ng-untouched ng-valid ng-empty')).sendKeys('89589');
         await element(by.className('button icon-left ion-paper-airplane')).click();
         await browser.wait(EC.visibilityOf(element(by.className('button button-buy ng-binding'))));
@@ -85,16 +77,16 @@ describe('Authentification and checkout test', function() {
             filteredElem[0].clear().sendKeys(dataset.shipping.postcode);
         });
         let phoneLabel = by.name('telephone');
-        await scroll(element(phoneLabel));
+        await context.helper.scroll(element(phoneLabel))
         await element.all(phoneLabel).filter(ele => ele.isDisplayed()).then(function (filteredElem) {
             filteredElem[0].clear().sendKeys(dataset.shipping.telephone);
         });
 
         let shippingMethodButton = element(by.css('[value="freeshipping_freeshipping"]'));
-        await scroll(shippingMethodButton);
+        await context.helper.scroll(shippingMethodButton);
         await browser.wait(EC.visibilityOf(shippingMethodButton));
         await shippingMethodButton.click();
-        await scroll(element(by.className('button button-block button-red')));
+        await context.helper.scroll(element(by.className('button button-block button-red')));
         await element(by.className('button button-block button-red')).click();
     });
 
@@ -107,7 +99,7 @@ describe('Authentification and checkout test', function() {
 
         //clicking on payment section and filling fields
         let paymentEditButton = element(by.className('item-payment'));
-        await scroll(paymentEditButton);
+        await context.helper.scroll(paymentEditButton);
         //if (element(by.xpath(".//*[text() = 'Add Payment Information']")).isDisplayed()) {
         if (await element(by.className("item-payment item-saved-cc require-saved-data not-valid")).isDisplayed()) {
             await browser.wait(EC.visibilityOf(paymentEditButton));
@@ -133,7 +125,7 @@ describe('Authentification and checkout test', function() {
             await browser.sleep(10000);
             }
             else if (await element(by.xpath(".//*[text() = 'CVV']")).isDisplayed()) {
-                await scroll(element(by.name("payment[cc_cid]")));
+                await context.helper.scroll(element(by.name("payment[cc_cid]")));
                 await element(by.name("payment[cc_cid]")).click();
                 await element(by.name("payment[cc_cid]")).sendKeys('123');
                 let checkoutButton = element(by.className('button button-block ng-binding button-balanced'));

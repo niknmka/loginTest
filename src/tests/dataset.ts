@@ -1,14 +1,14 @@
 export const dataset = {
 
     login : {
-        username: 'nustinovitch+1000@roguecontract.com',
+        username: 'nustinovitch+1001@roguecontract.com',
         password: 'qwerty'
     },
 
     registration : {
         firstname: 'John',
         lastname: 'Doe',
-        email: 'nustinovitch+1001@roguecontract.com',
+        email: 'nustinovitch+1007@roguecontract.com',
         password: 'qwerty'
     },
 
@@ -22,7 +22,7 @@ export const dataset = {
     },
 
     billing: {
-    cc_number: '4111111111111111',
+        cc_number: '4111111111111111',
         cc_expiration: '1225',
         cc_cvv: '123'
     }

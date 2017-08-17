@@ -7,15 +7,6 @@ import {} from 'mocha'
 import {dataset} from "./dataset"
 
 
-
-async function scrollAndClick(object) {
-    await browser.actions().mouseMove(object).perform()
-    await object.click()
-}
-async function scroll(object) {
-    await browser.actions().mouseMove(object).perform()
-}
-
 describe('payment test', function() {
 
     it('should open login page', async function () {
